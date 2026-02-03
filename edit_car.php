@@ -2,34 +2,29 @@
 session_start();
 require_once 'config.php';
 
+// Only allow Admins to perform this action
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'ADMIN') {
+    header("Location: index.php");
+    exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['car_id'])) {
     $id = $_POST['car_id'];
-    $status = $_POST['status'];
-    $model = $_POST['model'];
-    $type = $_POST['type'];
+    $model = trim($_POST['model']);
+    $type = trim($_POST['type']);
     $rate = $_POST['daily_rate'];
-    
-    $imageName = $_POST['existing_image']; // Default to old image
+    $status = $_POST['status'];
 
-    // Handle Image Upload
-    if (!empty($_FILES['car_image']['name'])) {
-        $targetDir = "uploads/";
-        if (!is_dir($targetDir)) mkdir($targetDir, 0777, true);
+    try {
+        $sql = "UPDATE tbl_cars SET model=?, type=?, daily_rate=?, status=? WHERE id=?";
+        $stmt = $pdo->prepare($sql);
         
-        $fileName = time() . '_' . basename($_FILES['car_image']['name']);
-        $targetFilePath = $targetDir . $fileName;
-
-        if (move_uploaded_file($_FILES['car_image']['tmp_name'], $targetFilePath)) {
-            $imageName = $fileName;
+        if ($stmt->execute([$model, $type, $rate, $status, $id])) {
+            header("Location: index.php?msg=updated");
+            exit;
         }
-    }
-
-    $sql = "UPDATE tbl_cars SET model=?, type=?, daily_rate=?, status=?, image=? WHERE id=?";
-    $stmt = $pdo->prepare($sql);
-    
-    if ($stmt->execute([$model, $type, $rate, $status, $imageName, $id])) {
-        header("Location: index.php?msg=updated");
-    } else {
-        echo "Error updating record.";
+    } catch (PDOException $e) {
+        die("Error updating record: " . $e->getMessage());
     }
 }
+?>
