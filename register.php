@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
         $insert = $pdo->prepare("INSERT INTO tbl_users (username, password) VALUES (?, ?)");
         if ($insert->execute([$userReg, $hashedPass])) {
+            
             $success = "Account created! You can now log in.";
         } else {
             $error = "Something went wrong. Please try again.";

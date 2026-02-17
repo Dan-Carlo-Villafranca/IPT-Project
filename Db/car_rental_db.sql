@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2026 at 11:21 AM
+-- Generation Time: Feb 17, 2026 at 04:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,10 +41,10 @@ CREATE TABLE `tbl_cars` (
 --
 
 INSERT INTO `tbl_cars` (`id`, `model`, `type`, `status`, `daily_rate`, `image`) VALUES
-(3, 'Toyota Innova', 'MPV', 'Available', 1450.00, NULL),
-(4, 'Toyota Wigo', 'Hatchback', 'Available', 800.00, NULL),
-(5, 'BMW M4', 'Luxury', 'Available', 9000.00, NULL),
-(6, 'Tesla Model V3', 'SUV', 'Available', 2250.00, NULL);
+(3, 'Toyota Innova', 'MPV', 'Available', 1450.00, 'toyota_innova.webp\r\n'),
+(4, 'Toyota Wigo', 'Hatchback', 'Available', 800.00, 'toyota_wigo.jpg'),
+(5, 'BMW M4', 'Luxury', 'Available', 9000.00, 'bmw_m4.avif'),
+(6, 'Tesla Model V3', 'SUV', 'Available', 2250.00, 'tesla_v3.jpg');
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,16 @@ INSERT INTO `tbl_users` (`id`, `username`, `password`, `role`) VALUES
 (15, 'InoYamanaka', '$2y$10$USJEvUMP6fiMXzvV3yeZnuHuBrQ40xEHM8bhTdBhtd769p8zNjAm6', 'Customer'),
 (16, 'Dan Carlo', '$2y$10$TZRHGiBYCrJXRqkcjWD92ehAvpg0G3Xz3/QUnWpDT8KRTMnuw3EHe', 'ADMIN'),
 (17, 'Josh Ngalis', '$2y$10$0ZYcsQ/uhqMa1cqBwOG/hOba6UupfMcSvXjorGi8iCMr95sd/UBxC', 'STAFF'),
-(18, 'David Pomeranz', '$2y$10$lGkcSvxmbuYVZTJY3ro2Q.hHACkECG3HXqOkpPG0C6DzbwF234Vz6', 'Customer');
+(18, 'David Pomeranz', '$2y$10$lGkcSvxmbuYVZTJY3ro2Q.hHACkECG3HXqOkpPG0C6DzbwF234Vz6', 'Customer'),
+(19, 'Shaun', '$2y$10$C5qGba/NYNlZoBf/TPc2tegUADTL48Mz9USnOgXkb3b7ckvydxeFG', 'ADMIN'),
+(20, 'Administrator', '$2y$10$7NQep1I9FWqZVg8bg8GwKuhpH43QLk34SZVcZ8n7o7ahOfMIgQx5i', 'ADMIN'),
+(21, 'Staff', '$2y$10$5SSgsQbdurTYsZ3RQ8xn2OGOCM5E8P.k.ruaWLSYMC44JscDsePUa', 'Customer'),
+(22, 'Customer', '$2y$10$M5LX5cbXo.a474T8B1eNEusO2Kzrd9NYBpCo9uxHSqFHazBMemzR6', 'Customer'),
+(23, 'qwertyuiop', '$2y$10$CNQFTrxOyS12zoDrhFijWeCUxXTnhDcqVVGU1OUdPsxOymVTWOcU2', 'Customer'),
+(24, '1234', '$2y$10$cfe5.giJq/IBA9PFmIrSjeYKQHyCrwS/uYKKbp2Juut.o1ihZbNyK', 'Customer'),
+(25, 'reg', '$2y$10$1JdQRkb0TDIyKkYB49hPMe7.tJFstfWIuNMA4abrMVwMep.VvfhQO', 'Customer'),
+(26, 'rreeg', '$2y$10$NfciH/n4umxJRrCLG.EmPemd5DACj.y17XFS94sxHcA62B8w4AUWy', 'Customer'),
+(27, '12345', '$2y$10$/NLqS5Ydr1eF5IQYYaEAwevCioM22E8dwZ1JWj8x.eFHCzOJJtIZ2', 'STAFF');
 
 --
 -- Indexes for dumped tables
@@ -96,13 +105,13 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_cars`
 --
 ALTER TABLE `tbl_cars`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

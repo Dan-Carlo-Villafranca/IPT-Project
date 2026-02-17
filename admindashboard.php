@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <meta charset="UTF-8">
     <title>DriveElite | Admin Control</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        [x-cloak] { display: none !important; }
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .glass-sidebar { background: #0f172a; }
     </style>
 </head>
-<body class="bg-slate-50">
+<body class="bg-slate-50" x-data="{ showLogoutModal: false }">
     <div class="flex min-h-screen">
         <aside class="w-64 glass-sidebar text-white flex flex-col fixed h-full">
             <div class="p-8">
@@ -19,16 +21,16 @@
                 <span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-1 rounded-md uppercase font-bold mt-2 inline-block">Admin Portal</span>
             </div>
             <nav class="flex-1 px-4 space-y-2">
-                <a href="#" class="flex items-center space-x-3 p-3 bg-indigo-600 rounded-xl text-white shadow-lg shadow-indigo-500/20">
+                <a href="index.php" class="flex items-center space-x-3 p-3 bg-indigo-600 rounded-xl text-white shadow-lg shadow-indigo-500/20">
                     <i class="fa-solid fa-gauge-high w-5"></i> <span>System Overview</span>
                 </a>
-                <a href="#" class="flex items-center space-x-3 p-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
+                <a href="manage_staff.php" class="flex items-center space-x-3 p-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
                     <i class="fa-solid fa-users w-5"></i> <span>Manage Staff</span>
                 </a>
-                <a href="#" class="flex items-center space-x-3 p-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
+                <a href="inventory.php" class="flex items-center space-x-3 p-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
                     <i class="fa-solid fa-car w-5"></i> <span>Full Inventory</span>
                 </a>
-                <a href="#" class="flex items-center space-x-3 p-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
+                <a href="customers.php" class="flex items-center space-x-3 p-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
                     <i class="fa-solid fa-users w-5"></i> <span>Customers Section</span>
                 </a>
                 <a href="#" class="flex items-center space-x-3 p-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
@@ -45,9 +47,9 @@
                         <p class="text-xs text-slate-500 italic">ADMIN</p>
                     </div>
                 </div>
-                <a href="auth.php?action=logout" class="flex items-center space-x-3 p-3 text-red-400 hover:bg-red-500/10 rounded-xl transition w-full">
-                    <i class="fa-solid fa-power-off"></i> <span>Logout</span>
-                </a>
+                <button @click.prevent="$dispatch('open-logout')" class="flex items-center space-x-3 p-3 text-red-400 hover:bg-red-500/10 rounded-xl transition w-full text-left">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Log Out</span>
+                </button>
             </div>
         </aside>
 
@@ -181,7 +183,8 @@
         }
     </script>
 </body>
-</html><!DOCTYPE html>
+</html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -196,7 +199,7 @@
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-slate-50">
+<body class="bg-slate-50" x-data="{ showLogoutModal: false }">
     <div class="flex min-h-screen">
         <aside class="w-64 glass-sidebar text-white flex flex-col fixed h-full">
             <div class="p-8">
@@ -226,9 +229,6 @@
                         <p class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">Super Admin</p>
                     </div>
                 </div>
-                <a href="auth.php?action=logout" class="flex items-center space-x-3 p-3 text-red-400 hover:bg-red-500/10 rounded-xl transition w-full">
-                    <i class="fa-solid fa-power-off"></i> <span>Logout</span>
-                </a>
             </div>
         </aside>
 
@@ -343,5 +343,38 @@
             openModal('editCarModal');
         }
     </script>
+        <div x-data="{ showLogoutModal: false }" @open-logout.window="showLogoutModal = true">
+    <div x-show="showLogoutModal" 
+         class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto" 
+         x-cloak>
+        
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
+
+        <div x-show="showLogoutModal" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             class="relative bg-white rounded-[2rem] max-w-sm w-full p-8 shadow-2xl border border-slate-100">
+            
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-50 mb-6">
+                    <i class="fa-solid fa-arrow-right-from-bracket text-red-500 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">Sign Out?</h3>
+                <p class="text-slate-500 mb-8">Are you sure you want to log out of your DriveElite account?</p>
+                
+                <div class="flex flex-col gap-3">
+                    <a href="auth.php?action=logout" 
+                       class="w-full py-4 bg-red-500 hover:bg-red-600 text-white font-bold rounded-2xl transition shadow-lg shadow-red-100">
+                        Yes, Log Me Out
+                    </a>
+                    <button @click="showLogoutModal = false" 
+                            class="w-full py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-2xl transition">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

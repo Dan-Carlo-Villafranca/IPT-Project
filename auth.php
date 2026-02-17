@@ -15,9 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $usernameInput = trim($_POST['username']); 
     $passwordInput = $_POST['password'];
 
-    $stmt = $pdo->prepare("SELECT * FROM tbl_users WHERE username = ? LIMIT 1");
-    $stmt->execute([$usernameInput]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (empty($usernameInput) || empty($passwordInput)) {
+        $error = "Please fill in all fields.";
+        } else {
+            $stmt = $pdo->prepare("SELECT * FROM tbl_users WHERE username = ? LIMIT 1");
+            $stmt->execute([$usernameInput]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
 
     if ($user) {
         $isCorrect = false;
@@ -35,6 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit;
         } else {
             $error = "Invalid password. Please try again.";
+        } 
+    } else {
+            // 4. Handle wrong username (user not found in DB)
+            $error = "Account not found or incorrect username.";
         }
-}
 }
