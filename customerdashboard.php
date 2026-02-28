@@ -18,7 +18,7 @@
     <div class="flex min-h-screen">
         <aside class="w-64 glass-sidebar text-white flex flex-col fixed h-full">
             <div class="p-8">
-                <h1 class="text-2xl font-bold tracking-tighter text-indigo-400">DriveElite</h1>
+                <h1 class="text-2xl font-bold tracking-tighter text-indigo-400">Rent N' Ride</h1>
             </div>
             <nav class="flex-1 px-4 space-y-2">
                 <a href="#" class="flex items-center space-x-3 p-3 bg-indigo-600 rounded-xl text-white">

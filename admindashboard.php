@@ -203,7 +203,7 @@
     <div class="flex min-h-screen">
         <aside class="w-64 glass-sidebar text-white flex flex-col fixed h-full">
             <div class="p-8">
-                <h1 class="text-2xl font-bold tracking-tighter text-indigo-400">DriveElite</h1>
+                <h1 class="text-2xl font-bold tracking-tighter text-indigo-400">Rent N' Ride</h1>
                 <span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-1 rounded-md uppercase font-bold mt-2 inline-block italic">Admin Portal</span>
             </div>
             

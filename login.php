@@ -17,7 +17,7 @@ require_once 'auth.php'; ?>
         <div class="md:w-1/2 bg-slate-900 p-12 text-white flex flex-col justify-between" 
              style="background-image: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.8)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1000'); background-size: cover;">
             <div>
-                <h1 class="text-3xl font-bold tracking-tighter text-indigo-400 mb-2">DriveElite</h1>
+                <h1 class="text-3xl font-bold tracking-tighter text-indigo-400 mb-2">Rent N' Ride</h1>
                 <p class="text-slate-300">Management Information System</p>
             </div>
             <div>
