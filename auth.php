@@ -2,9 +2,56 @@
 session_start();
 require_once 'config.php';
 
+/**
+ * SESSION SECURITY: PREVENT BACK BUTTON AFTER LOGOUT
+ * This sends headers to the browser to prevent it from caching the page.
+ * When a user clicks 'Back' after logging out, the browser will be forced 
+ * to refresh and find no session, redirecting them to login.
+ */
+function prevent_back_button() {
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+    header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+}
+
+/**
+ * AUTHENTICATION GUARD
+ * Add this to the top of your dashboard files.
+ */
+function check_login() {
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: login.php");
+        exit;
+    }
+}
+
 // LOGOUT LOGIC
+// if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+//     session_destroy();
+//     header("Location: login.php");
+//     exit;
+// }
+
+
+// --- LOGOUT LOGIC ---
 if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+    // Clear the session array
+    $_SESSION = array();
+
+    // Effectively destroy the session cookie
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
+    }
+
+    // Destroy the session on the server
     session_destroy();
+    
+    // Redirect to login page
     header("Location: login.php");
     exit;
 }
